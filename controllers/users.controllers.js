@@ -1,5 +1,14 @@
+const User = require("../models/users.model");
+
 //@Route: /api/v1/users
 //@Method: POST
 //@Access: private
 
-exports.createUser = (req, res, next) => {};
+exports.createUser = async (req, res, next) => {
+  try {
+    const newUser = User.create(req.body);
+    res.status(200).json(newUser);
+  } catch (err) {
+    console.log(err);
+  }
+};
