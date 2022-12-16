@@ -14,11 +14,15 @@ const ProjectSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
-  author: {
-    type: Schema.Types.ObjectId,
+  user: {
+    type: mongoose.Types.ObjectId,
     ref: "User",
     required: [true, "User ID required."],
   },
+});
+
+ProjectSchema.static("findByUser", function (user) {
+  return this.find({ user: user });
 });
 
 module.exports = mongoose.model("Project", ProjectSchema);

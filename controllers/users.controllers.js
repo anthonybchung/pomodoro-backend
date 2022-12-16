@@ -6,9 +6,14 @@ const User = require("../models/users.model");
 
 exports.createUser = async (req, res, next) => {
   try {
-    const newUser = User.create(req.body);
+    const newUser = await User.create(req.body);
     res.status(200).json(newUser);
   } catch (err) {
     console.log(err);
   }
+};
+
+exports.getAllUsers = async (req, res, next) => {
+  const allUsers = await User.find();
+  res.status(200).json(allUsers);
 };
